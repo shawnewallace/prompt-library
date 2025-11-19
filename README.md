@@ -103,6 +103,115 @@ This library is inspired by and complements these excellent prompt resources:
 - **[Awesome System Prompts](https://github.com/abilzerian/Awesome-System-Prompts)** - Collection of system prompts for various AI assistants
 - **[ChatGPT System Prompts](https://github.com/mustvlad/ChatGPT-System-Prompts)** - System prompts for different personas and use cases
 
+## Quick Start: Common Prompts
+
+Ready-to-use prompts for everyday development tasks. Copy and paste these directly into your AI assistant.
+
+### Code Review
+
+```
+Review the following code for:
+- Code quality and readability
+- Best practices and design patterns
+- Potential bugs or edge cases
+- Performance considerations
+- Security vulnerabilities
+- Test coverage gaps
+
+[Paste your code here]
+```
+
+### Debugging & Bug Fixing
+
+```
+I'm encountering the following issue:
+
+**Problem:** [Describe the bug/error]
+**Expected behavior:** [What should happen]
+**Actual behavior:** [What's actually happening]
+**Error messages:** [Any error output]
+
+**Code:**
+[Paste relevant code]
+
+**Context:**
+[Environment, dependencies, recent changes]
+
+Please help me:
+1. Identify the root cause
+2. Suggest a fix
+3. Explain why this is happening
+4. Recommend how to prevent similar issues
+```
+
+### Writing Tests
+
+```
+Generate comprehensive unit tests for the following code:
+
+[Paste your code here]
+
+Requirements:
+- Test happy path scenarios
+- Test edge cases and error conditions
+- Test boundary values
+- Include setup and teardown if needed
+- Use [specify testing framework: Jest/pytest/xUnit/etc.]
+- Follow [specify pattern: AAA/Given-When-Then/etc.]
+- Aim for high code coverage
+```
+
+### Documentation
+
+```
+Create documentation for the following code:
+
+[Paste your code here]
+
+Please provide:
+1. Clear description of what the code does
+2. Parameter/argument descriptions
+3. Return value documentation
+4. Usage examples
+5. Any important notes or warnings
+6. Dependencies or prerequisites
+
+Format: [Markdown/JSDoc/XML Documentation Comments/etc.]
+```
+
+### Refactoring
+
+```
+Refactor the following code to improve:
+- Readability and maintainability
+- Performance
+- Adherence to SOLID principles
+- Design patterns usage
+- Code organization
+
+[Paste your code here]
+
+Please:
+1. Explain what needs improvement
+2. Provide the refactored version
+3. Explain the changes and why they're better
+```
+
+### Explain Code
+
+```
+Explain the following code in detail:
+
+[Paste your code here]
+
+Please provide:
+1. High-level overview of what it does
+2. Step-by-step breakdown of the logic
+3. Explanation of any complex algorithms or patterns
+4. Purpose of each major component
+5. How it fits into the larger system (if context provided)
+```
+
 ## Contributing
 
 Feel free to add new scenarios, prompts, or improvements. Each scenario should include:
