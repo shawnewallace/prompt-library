@@ -76,6 +76,33 @@ Copy instructions from `scenarios/{scenario}/claude-code/instructions.md` to you
 ### For GitHub Copilot
 Copy content from `scenarios/{scenario}/github-copilot/instructions.md` to `.github/copilot-instructions.md` in your project.
 
+## Related Prompt Libraries
+
+This library is inspired by and complements these excellent prompt resources:
+
+### Official AI Provider Libraries
+
+- **[Anthropic Prompt Library](https://docs.anthropic.com/claude/prompt-library)** - Official collection of prompts for Claude, covering coding, analysis, and creative tasks
+- **[OpenAI Cookbook](https://github.com/openai/openai-cookbook)** - Examples and guides for using OpenAI APIs effectively
+- **[Google AI Prompt Gallery](https://ai.google.dev/examples)** - Prompt examples for Gemini and other Google AI models
+
+### Community Collections
+
+- **[Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts)** - Curated list of ChatGPT prompts for various use cases
+- **[Awesome Prompts](https://github.com/ai-boost/awesome-prompts)** - Large collection of prompts for different AI models and scenarios
+- **[LangChain Prompt Templates](https://python.langchain.com/docs/modules/model_io/prompts/)** - Reusable prompt templates for LangChain applications
+
+### Developer-Focused
+
+- **[GitHub Copilot Patterns](https://github.blog/developer-skills/github/how-to-write-better-prompts-for-github-copilot/)** - Best practices for writing Copilot prompts
+- **[Cursor Rules](https://github.com/pontusab/cursor.directory)** - Community-sourced rules and prompts for Cursor IDE
+- **[Prompt Engineering Guide](https://www.promptingguide.ai/)** - Comprehensive guide to prompt engineering techniques
+
+### System Prompts & Instructions
+
+- **[Awesome System Prompts](https://github.com/abilzerian/Awesome-System-Prompts)** - Collection of system prompts for various AI assistants
+- **[ChatGPT System Prompts](https://github.com/mustvlad/ChatGPT-System-Prompts)** - System prompts for different personas and use cases
+
 ## Contributing
 
 Feel free to add new scenarios, prompts, or improvements. Each scenario should include:
