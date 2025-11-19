@@ -95,6 +95,7 @@ This library is inspired by and complements these excellent prompt resources:
 ### Developer-Focused
 
 - **[GitHub Copilot Patterns](https://github.blog/developer-skills/github/how-to-write-better-prompts-for-github-copilot/)** - Best practices for writing Copilot prompts
+- **[Awesome Copilot](https://github.com/github/awesome-copilot)** - Curated list of GitHub Copilot examples, guides, and resources
 - **[Cursor Rules](https://github.com/pontusab/cursor.directory)** - Community-sourced rules and prompts for Cursor IDE
 - **[Prompt Engineering Guide](https://www.promptingguide.ai/)** - Comprehensive guide to prompt engineering techniques
 
