@@ -3,7 +3,9 @@
     "allow": [
       "Bash(tree:*)",
       "Bash(git -C /Users/shawn/Desktop/prompt-library log --oneline --all -10)",
-      "Bash(node bin/prompt-library.js:*)"
+      "Bash(node bin/prompt-library.js:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
