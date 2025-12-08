@@ -59,7 +59,8 @@ Prompts for infrastructure as code, CI/CD, and deployment automation.
 ## Shared Resources
 
 The [`shared/`](shared/) directory contains resources used across multiple scenarios:
-- **prompts/** - General-purpose prompts (code review, documentation, debugging)
+- **agents/** - Reusable agent definitions (clarity-editor, check, architect, plan)
+- **prompts/** - General-purpose prompts (code review, documentation, debugging, writing clarity)
 - **templates/** - Reusable prompt templates
 - **snippets/** - Common prompt fragments
 
@@ -212,6 +213,35 @@ Please provide:
 4. Purpose of each major component
 5. How it fits into the larger system (if context provided)
 ```
+
+### Writing Review (Orwell Principles)
+
+```
+Review and improve the following text for clarity using Orwell's six rules:
+
+[Paste your writing here]
+
+Please:
+1. Identify clarity issues (tired metaphors, passive voice, jargon, filler)
+2. Provide a revised version with improvements
+3. Explain key changes and their rationale
+4. Show word count reduction
+5. Apply Orwell's principles:
+   - Never use tired metaphors
+   - Use short words
+   - Cut relentlessly
+   - Choose active voice
+   - Drop the jargon
+   - Break rules when they make you sound ridiculous
+
+Target audience: [General/Technical/Business/etc.]
+```
+
+**Use for:** PR documents, architecture docs, incident reports, code reviews, team updates, technical writing, email communications
+
+**Agent available:** Use the [`clarity-editor`](shared/agents/clarity-editor.agent.md) agent for interactive writing review sessions.
+
+For detailed guidelines, see [`shared/prompts/review-writing-clarity.prompt.md`](shared/prompts/review-writing-clarity.prompt.md)
 
 ## Contributing
 

@@ -4,12 +4,22 @@ Cross-scenario resources that can be used across different project contexts.
 
 ## Structure
 
+### agents/
+Reusable agent definitions for AI coding assistants:
+- **clarity-editor** - Review and improve writing clarity using Orwell principles
+- **check** - Code review focusing on standards and best practices
+- **architect** - Software architecture guidance and design decisions
+- **api-architect** - API design and architecture recommendations
+- **plan** - Project planning and task breakdown
+- **expert-dotnet-software-engineer** - Expert .NET development guidance
+
 ### prompts/
 General-purpose prompts applicable to multiple scenarios:
 - Code review guidelines
 - Documentation generation
 - Debugging strategies
 - Refactoring patterns
+- Writing clarity review (Orwell principles)
 - General best practices
 
 ### templates/
