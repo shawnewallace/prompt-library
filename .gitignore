@@ -49,6 +49,9 @@ yarn-error.log*
 # .NET
 bin/
 obj/
+
+# Exception: Allow CLI bin directory
+!cli/bin/
 *.user
 *.suo
 
