@@ -1,0 +1,11 @@
+tests/
+coverage/
+.eslintrc.json
+.prettierrc
+jest.config.js
+*.test.js
+.git/
+.github/
+node_modules/
+.DS_Store
+*.log
