@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(git -C /Users/shawn/Desktop/prompt-library log --oneline --all -10)",
+      "Bash(node bin/prompt-library.js:*)"
     ],
     "deny": [],
     "ask": []

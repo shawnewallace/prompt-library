@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-12-08",
+  "agents": [
+    {
+      "id": "hemingway",
+      "name": "Hemingway",
+      "description": "Review and improve writing clarity using Orwell principles for clear, concise communication",
+      "sourcePath": "shared/agents/clarity-editor.agent.md",
+      "tags": ["writing", "clarity", "review", "editing"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "archy",
+      "name": "Archy",
+      "description": "Architect or technical leader mode for strategic planning and system design",
+      "sourcePath": "shared/agents/architect.agent.md",
+      "tags": ["architecture", "planning", "design", "leadership"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "chester",
+      "name": "Chester",
+      "description": "Perform a code review focusing on adherence to coding standards, testing practices, and commit conventions",
+      "sourcePath": "shared/agents/check.agent.md",
+      "tags": ["code-review", "standards", "quality", "testing"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "sharp",
+      "name": "Sharp",
+      "description": "Provide expert .NET software engineering guidance using modern software design patterns",
+      "sourcePath": "shared/agents/expert-dotnet-software-engineer.agent.md",
+      "tags": ["dotnet", "csharp", "architecture", "expert"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "percy",
+      "name": "Percy",
+      "description": "Strategic planning and architecture assistant focused on thoughtful analysis before implementation",
+      "sourcePath": "shared/agents/plan.agent.md",
+      "tags": ["planning", "strategy", "analysis", "architecture"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "apex",
+      "name": "Apex",
+      "description": "API architect specialized in designing and implementing API connectivity with resilience patterns",
+      "sourcePath": "shared/agents/api-architect.agent.md",
+      "tags": ["api", "architecture", "design", "resilience"],
+      "tools": ["claude-code", "github-copilot"]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "writing-clarity",
+      "name": "Writing Clarity Review",
+      "description": "Review and improve writing clarity using Orwell's six rules for clear communication",
+      "sourcePath": "shared/prompts/review-writing-clarity.prompt.md",
+      "tags": ["writing", "clarity", "review", "orwell"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "adr",
+      "name": "Architectural Decision Record",
+      "description": "Create an ADR document using structured formatting optimized for AI consumption and human readability",
+      "sourcePath": "shared/prompts/create-architectural-decision-record.prompt.md",
+      "tags": ["architecture", "documentation", "adr", "decisions"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "readme",
+      "name": "README Generator",
+      "description": "Create a comprehensive and well-structured README.md file for the project",
+      "sourcePath": "shared/prompts/create-readme.prompt.md",
+      "tags": ["documentation", "readme", "project"],
+      "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "client-discovery",
+      "name": "Client Discovery Meeting",
+      "description": "Extract and organize details from client discovery meetings",
+      "sourcePath": "shared/prompts/extract-client-discovery-meeting-details.prompt.md",
+      "tags": ["client", "discovery", "meetings", "project-management"],
+      "tools": ["claude-code", "github-copilot"]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "dotnet-clean-architecture",
+      "name": ".NET Clean Architecture",
+      "description": "Prompts and tools for building .NET applications with Clean Architecture, Domain-Driven Design, and SOLID principles",
+      "sourcePath": "scenarios/dotnet-clean-architecture",
+      "tags": ["dotnet", "csharp", "clean-architecture", "ddd", "solid"],
+      "tools": ["claude-code", "github-copilot"],
+      "includes": {
+        "agents": ["sharp", "archy"],
+        "prompts": ["adr"],
+        "instructions": [
+          "scenarios/dotnet-clean-architecture/github-copilot/instructions.md"
+        ]
+      }
+    },
+    {
+      "id": "python-data-science",
+      "name": "Python Data Science",
+      "description": "Resources for data analysis, machine learning, and scientific computing projects",
+      "sourcePath": "scenarios/python-data-science",
+      "tags": ["python", "data-science", "ml", "pandas", "numpy"],
+      "tools": ["claude-code", "github-copilot"],
+      "includes": {
+        "agents": ["percy"],
+        "prompts": ["readme"],
+        "instructions": []
+      }
+    },
+    {
+      "id": "typescript-frontend",
+      "name": "TypeScript Frontend",
+      "description": "Tools for modern frontend development with TypeScript/JavaScript frameworks",
+      "sourcePath": "scenarios/typescript-frontend",
+      "tags": ["typescript", "javascript", "react", "vue", "angular", "frontend"],
+      "tools": ["claude-code", "github-copilot"],
+      "includes": {
+        "agents": ["archy", "chester"],
+        "prompts": ["readme"],
+        "instructions": []
+      }
+    },
+    {
+      "id": "devops-infrastructure",
+      "name": "DevOps Infrastructure",
+      "description": "Prompts for infrastructure as code, CI/CD, and deployment automation",
+      "sourcePath": "scenarios/devops-infrastructure",
+      "tags": ["devops", "infrastructure", "iac", "cicd", "terraform"],
+      "tools": ["claude-code", "github-copilot"],
+      "includes": {
+        "agents": ["archy"],
+        "prompts": [],
+        "instructions": []
+      }
+    }
+  ]
+}
