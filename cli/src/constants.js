@@ -17,7 +17,7 @@ const PATH_MAPPINGS = {
     prompts: '.claude/prompts',
   },
   [TOOL_TYPES.GITHUB_COPILOT]: {
-    agents: '.github/chatmodes',
+    agents: '.github/agents',
     prompts: '.github/prompts',
     instructions: '.github/instructions',
     main: '.github/copilot-instructions.md',

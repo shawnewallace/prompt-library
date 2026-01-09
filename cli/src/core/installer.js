@@ -5,7 +5,7 @@
 const path = require('path');
 const { fetchFile } = require('./fetcher.js');
 const { writeFile, writeJson, readJson, fileExists, computeHash } = require('./file-system.js');
-const { TOOL_TYPES, PATH_MAPPINGS, TRACKING_FILE } = require('../constants.js');
+const { PATH_MAPPINGS, TRACKING_FILE } = require('../constants.js');
 
 /**
  * Get target path for an item based on tool and type

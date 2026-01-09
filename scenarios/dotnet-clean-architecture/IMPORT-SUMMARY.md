@@ -25,11 +25,11 @@ These are referenced by the main instructions.md:
 4. **object-calisthenics.instructions.md** - Object-oriented design rules and constraints
 5. **unit-and-integration-tests.instructions.md** - Testing strategies and best practices
 
-### GitHub Copilot Chat Modes (2 files)
-Located in: `github-copilot/chatmodes/`
+### GitHub Copilot Agents (2 files)
+Located in: `github-copilot/agents/`
 
-1. **api-architect.chatmode.md** - API design and implementation guidance with resilience patterns (circuit breaker, bulkhead, throttling, backoff)
-2. **expert-dotnet-software-engineer.chatmode.md** - .NET development expertise and patterns
+1. **api-architect.agent.md** - API design and implementation guidance with resilience patterns (circuit breaker, bulkhead, throttling, backoff)
+2. **expert-dotnet-software-engineer.agent.md** - .NET development expertise and patterns
 
 ### Prompts (2 files)
 Located in: `prompts/`
@@ -45,9 +45,9 @@ The following files were moved to `../../shared/` because they apply across mult
 1. **conventional-commits.instructions.md** - Git commit message formatting (universal)
 2. **follow-up-question.instructions.md** - Guidelines for asking clarifying questions (universal)
 
-### Chat Modes (2 files → shared/github-copilot/chatmodes/)
-1. **plan.chatmode.md** - Planning and task breakdown mode (universal)
-2. **architect.chatmode.md** - Software architecture and design decisions (universal)
+### Agents (2 files → shared/agents/)
+1. **plan.agent.md** - Planning and task breakdown mode (universal)
+2. **architect.agent.md** - Software architecture and design decisions (universal)
 
 ### Prompts (2 files → shared/prompts/)
 1. **create-architectural-decision-record.prompt.md** - ADR creation template (universal)
@@ -60,12 +60,12 @@ The following files were moved to `../../shared/` because they apply across mult
 **Scenario-Specific (in dotnet-clean-architecture/):**
 - Main Copilot Config: 1
 - Contextual Instructions: 5
-- Chat Modes: 2
+- Agents: 2
 - Prompts: 2
 
 **Universal (moved to shared/):**
 - Instructions: 2
-- Chat Modes: 2
+- Agents: 2
 - Prompts: 2
 
 ## File Organization
@@ -75,15 +75,15 @@ scenarios/dotnet-clean-architecture/
 ├── github-copilot/
 │   ├── instructions.md              # Main Copilot file
 │   ├── instructions/                # Contextual instructions (5 files)
-│   └── chatmodes/                   # Scenario-specific modes (2 files)
+│   └── agents/                      # Scenario-specific agents (2 files)
 ├── prompts/                         # Scenario-specific prompts (2 files)
 ├── README.md
 └── IMPORT-SUMMARY.md
 
 shared/
+├── agents/                          # Universal agents (2 files)
 ├── github-copilot/
-│   ├── instructions/                # Universal instructions (2 files)
-│   └── chatmodes/                   # Universal modes (2 files)
+│   └── instructions/                # Universal instructions (2 files)
 └── prompts/                         # Universal prompts (2 files)
 ```
 

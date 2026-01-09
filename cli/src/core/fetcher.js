@@ -90,7 +90,7 @@ async function fileExists(path) {
   try {
     await fetchFile(path, { maxRetries: 1 });
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 }

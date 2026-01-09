@@ -2,7 +2,6 @@
  * Registry utility - Load and query available agents, prompts, and scenarios
  */
 
-const path = require('path');
 const registryData = require('../../.prompt-library/registry.json');
 
 /**

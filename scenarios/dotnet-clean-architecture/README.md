@@ -32,11 +32,11 @@ These are referenced by the main `instructions.md` file:
 - **object-calisthenics.instructions.md** - Object-oriented design constraints
 - **unit-and-integration-tests.instructions.md** - Testing strategies and TDD practices
 
-### GitHub Copilot Chat Modes
-Located in: `github-copilot/chatmodes/`
+### GitHub Copilot Agents
+Located in: `github-copilot/agents/`
 
-- **api-architect.chatmode.md** - API design with resilience patterns (circuit breaker, bulkhead, throttling)
-- **expert-dotnet-software-engineer.chatmode.md** - .NET development expertise and best practices
+- **api-architect.agent.md** - API design with resilience patterns (circuit breaker, bulkhead, throttling)
+- **expert-dotnet-software-engineer.agent.md** - .NET development expertise and best practices
 
 ### Prompts
 Located in: `prompts/`
@@ -50,7 +50,7 @@ See [../../shared/](../../shared/) for universal resources that work across scen
 
 - **Prompts:** ADR creation, README generation
 - **Instructions:** Conventional commits, follow-up questions
-- **Chat Modes:** Planning, general architecture
+- **Agents:** Planning, general architecture
 
 ## Key Concepts Covered
 
@@ -67,7 +67,7 @@ See [../../shared/](../../shared/) for universal resources that work across scen
 
 1. Copy `github-copilot/instructions.md` to your project's `.github/copilot-instructions.md`
 2. Copy the `instructions/` folder to `.github/instructions/` in your project
-3. Copy relevant chat modes to `.github/chatmodes/` if supported by your Copilot setup
+3. Copy relevant agents to `.github/agents/` if supported by your Copilot setup
 4. GitHub Copilot will automatically use these instructions for context
 
 ## Project Context

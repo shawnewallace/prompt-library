@@ -9,6 +9,34 @@ This library contains curated prompts and configurations for various AI coding a
 - **GitHub Copilot** - Context-specific instructions
 - **General Prompts** - Reusable prompts for various tasks
 
+## Quick Install with CLI
+
+The fastest way to use this library is with the **prompt-library CLI tool**:
+
+```bash
+# Install globally
+npm install -g @shawnwallace/prompt-library
+
+# Or use with npx
+npx @shawnwallace/prompt-library init
+```
+
+The CLI provides:
+- 🚀 Interactive setup wizard
+- 🎯 Fuzzy search for agents and prompts
+- 📦 Pre-configured scenario bundles
+- 🔄 Support for Claude Code and GitHub Copilot
+- 📊 Installation tracking
+
+**Example usage:**
+```bash
+prompt-library init              # Interactive setup
+prompt-library list --agents     # Browse available agents
+prompt-library add hemingway     # Install writing clarity agent
+```
+
+For full CLI documentation, see the [CLI README](cli/README.md).
+
 ## Structure
 
 ```
@@ -66,15 +94,30 @@ The [`shared/`](shared/) directory contains resources used across multiple scena
 
 ## Usage
 
-1. **Select a scenario** based on your current project context
-2. **Configure your tools** with the scenario-specific instructions
-3. **Use the prompts** as needed for specific tasks
-4. **Refer to examples** to see real-world applications
+### Option 1: CLI Tool (Recommended)
 
-### For Claude Code
+Use the CLI for quick, automated installation:
+
+```bash
+# Interactive setup
+prompt-library init
+
+# Or install specific items
+prompt-library add hemingway
+prompt-library add dotnet-clean-architecture
+```
+
+See the [CLI README](cli/README.md) for full documentation.
+
+### Option 2: Manual Installation
+
+1. **Select a scenario** based on your current project context
+2. **Copy files manually** to your project
+
+**For Claude Code:**
 Copy instructions from `scenarios/{scenario}/claude-code/instructions.md` to your Claude Code configuration or use slash commands from the `commands/` folder.
 
-### For GitHub Copilot
+**For GitHub Copilot:**
 Copy content from `scenarios/{scenario}/github-copilot/instructions.md` to `.github/copilot-instructions.md` in your project.
 
 ## Related Prompt Libraries

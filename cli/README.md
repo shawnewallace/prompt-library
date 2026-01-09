@@ -13,6 +13,11 @@ Install agents like Hemingway (writing clarity), Archy (architecture), and Chest
 - 📊 **Installation Tracking** - Keeps track of installed items
 - ✨ **Smart Defaults** - Auto-detects your setup
 
+## Requirements
+
+- Node.js 18.0.0 or higher
+- npm or npx
+
 ## Installation
 
 ```bash
@@ -200,7 +205,7 @@ Supports fuzzy matching for item names.
 **GitHub Copilot:**
 ```
 .github/
-├── chatmodes/
+├── agents/
 │   ├── hemingway.md
 │   └── archy.md
 └── prompts/
