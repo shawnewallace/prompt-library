@@ -29,9 +29,10 @@ function run() {
   program
     .command('init')
     .description('Initialize prompt-library in your project')
-    .action(async () => {
+    .option('--dry-run', 'Preview what would be installed without actually installing')
+    .action(async (options) => {
       try {
-        await initCommand();
+        await initCommand(options);
       } catch (error) {
         console.error(chalk.red(`Error: ${error.message}`));
         process.exit(1);
@@ -59,9 +60,10 @@ function run() {
   program
     .command('add <name>')
     .description('Add a specific agent, prompt, or scenario')
-    .action(async (name) => {
+    .option('--dry-run', 'Preview what would be installed without actually installing')
+    .action(async (name, options) => {
       try {
-        await addCommand(name);
+        await addCommand(name, options);
       } catch (error) {
         console.error(chalk.red(`Error: ${error.message}`));
         process.exit(1);

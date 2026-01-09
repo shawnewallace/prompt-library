@@ -20,17 +20,64 @@ Install agents like Hemingway (writing clarity), Archy (architecture), and Chest
 
 ## Installation
 
+### Option 1: Global Installation (Recommended)
+
+Install the CLI tool globally so you can use it from any project.
+
+**You can run this from ANY directory** - it installs to your system globally:
+
 ```bash
-# Install globally (recommended)
+npm install -g @shawnwallace/prompt-library
+```
+
+Verify installation:
+```bash
+prompt-library --version
+```
+
+**Example:**
+```bash
+# This works from anywhere - your home directory, desktop, etc.
+cd ~
 npm install -g @shawnwallace/prompt-library
 
-# Or use with npx (no installation required)
+# Now the 'prompt-library' command is available everywhere
+```
+
+### Option 2: Use with npx (No Installation)
+
+Run the tool without installing it.
+
+**You can run this from ANY directory** - npx downloads and runs it temporarily:
+
+```bash
 npx @shawnwallace/prompt-library init
 ```
 
+**Note:** You'll need to prefix all commands with `npx @shawnwallace/prompt-library` instead of just `prompt-library`.
+
+**Example:**
+```bash
+# This also works from anywhere
+cd ~
+npx @shawnwallace/prompt-library --version
+```
+
+---
+
+**⚠️ Important:** While installation can happen from anywhere, you must **run the actual commands** (`init`, `add`, etc.) **from your project directory** where you want the agents installed. See Quick Start below.
+
 ## Quick Start
 
-### Interactive Setup
+### Step 1: Navigate to Your Project
+
+**Important:** Run the CLI from your project's root directory where you want the agents installed.
+
+```bash
+cd /path/to/your/project
+```
+
+### Step 2: Interactive Setup
 
 Start with the interactive wizard to set up your project:
 
@@ -42,10 +89,22 @@ This will:
 1. Ask which AI tool you're using (Claude Code or GitHub Copilot)
 2. Optionally select a scenario template
 3. Choose agents and prompts to install
-4. Install files to the correct directories
-5. Create a tracking file for your installation
+4. Install files to the correct directories in your project
+5. Create a `.prompt-library.json` tracking file in your project root
 
-### Browse Available Items
+**Example:**
+```bash
+# For a .NET project using Claude Code
+cd ~/projects/my-dotnet-app
+prompt-library init
+# Select: Claude Code → dotnet-clean-architecture
+
+# Files will be installed to:
+# ~/projects/my-dotnet-app/.claude/agents/
+# ~/projects/my-dotnet-app/.claude/prompts/
+```
+
+### Step 3: Browse Available Items
 
 See all available agents, prompts, and scenarios:
 
@@ -61,9 +120,9 @@ prompt-library list --scenarios   # Show only scenarios
 prompt-library list --installed   # Show only installed items
 ```
 
-### Add Individual Items
+### Step 4: Add More Items Later
 
-Install a specific agent or prompt:
+Install additional agents or prompts anytime:
 
 ```bash
 prompt-library add hemingway           # Writing clarity editor
@@ -75,6 +134,75 @@ The command uses fuzzy search, so you can use partial names:
 ```bash
 prompt-library add clarity    # Finds "clarity-editor" agent
 ```
+
+## Updating Agents
+
+### Check What's Installed
+
+First, see what you have installed:
+
+```bash
+prompt-library list --installed
+```
+
+### Reinstall/Update Individual Agents
+
+To update an agent to the latest version from the repository:
+
+```bash
+prompt-library add <agent-name>
+# When prompted, select "Reinstall (overwrite)"
+```
+
+**Example:**
+```bash
+prompt-library add hemingway
+# Output: "Hemingway is already installed."
+# Choose: "Reinstall (overwrite)"
+```
+
+### Update All Agents (Manual Process)
+
+Currently, you need to manually reinstall each agent:
+
+```bash
+# List installed items
+prompt-library list --installed
+
+# Reinstall each one
+prompt-library add hemingway    # Select: Reinstall
+prompt-library add archy        # Select: Reinstall
+# ... repeat for each installed item
+```
+
+**Pro Tip:** Use `--dry-run` to preview changes before reinstalling:
+
+```bash
+prompt-library add hemingway --dry-run
+```
+
+### Force Clean Reinstall
+
+If you want to start fresh:
+
+1. **Remove existing files:**
+   ```bash
+   # For Claude Code
+   rm -rf .claude/agents .claude/prompts
+
+   # For GitHub Copilot
+   rm -rf .github/agents .github/prompts
+   ```
+
+2. **Remove tracking file:**
+   ```bash
+   rm .prompt-library.json
+   ```
+
+3. **Reinstall:**
+   ```bash
+   prompt-library init
+   ```
 
 ## Available Items
 
@@ -143,14 +271,28 @@ prompt-library init
 # Team members get: Archy, Chester, and README generator
 ```
 
+### Example 4: Preview Before Installing
+
+```bash
+# Preview what would be installed
+prompt-library add dotnet-clean-architecture --dry-run
+
+# Preview the init wizard
+prompt-library init --dry-run
+
+# After reviewing, install without --dry-run
+prompt-library add dotnet-clean-architecture
+```
+
 ## Commands
 
-### `init`
+### `init [options]`
 
 Interactive setup wizard.
 
 ```bash
 prompt-library init
+prompt-library init --dry-run    # Preview without installing
 ```
 
 Walks you through:
@@ -158,6 +300,9 @@ Walks you through:
 - Scenario or custom selection
 - Agent and prompt selection
 - Installation and tracking setup
+
+**Options:**
+- `--dry-run` - Preview what would be installed without actually installing files
 
 ### `list [options]`
 
@@ -171,15 +316,19 @@ prompt-library list --scenarios  # Scenarios only
 prompt-library list --installed  # Installed items only
 ```
 
-### `add <name>`
+### `add <name> [options]`
 
 Add a specific agent, prompt, or scenario.
 
 ```bash
 prompt-library add <name>
+prompt-library add <name> --dry-run    # Preview without installing
 ```
 
 Supports fuzzy matching for item names.
+
+**Options:**
+- `--dry-run` - Preview what would be installed without actually installing files
 
 ### Options
 
@@ -241,43 +390,150 @@ The CLI creates `.prompt-library.json` to track installed items:
 
 ### Command Not Found
 
-If `prompt-library` command is not found after global installation:
+**Problem:** `prompt-library: command not found` after global installation
+
+**Solution:**
 
 ```bash
 # Check if npm global bin is in PATH
 npm config get prefix
 
-# Add to PATH (example for macOS/Linux)
+# Add to PATH permanently (macOS/Linux - add to ~/.bashrc or ~/.zshrc)
 export PATH="$(npm config get prefix)/bin:$PATH"
 
-# Or use npx instead
+# For Windows, add to System Environment Variables:
+# Control Panel → System → Advanced → Environment Variables
+# Add npm global bin path to PATH
+
+# Alternative: Use npx instead
 npx @shawnwallace/prompt-library init
+```
+
+### Wrong Directory
+
+**Problem:** Files installed in the wrong location
+
+**Common Mistake:**
+```bash
+# ❌ Running from CLI package directory
+cd /usr/local/lib/node_modules/@shawnwallace/prompt-library
+prompt-library init  # Files go to wrong place!
+```
+
+**Solution:**
+```bash
+# ✅ Run from YOUR project directory
+cd ~/projects/my-app
+prompt-library init  # Files go to ~/projects/my-app/.claude/
 ```
 
 ### Permission Errors
 
-If you get permission errors during installation:
+**Problem:** `EACCES: permission denied` during npm install
 
+**Solution 1 (Recommended):** Use npx without installation
 ```bash
-# Use npx (recommended)
 npx @shawnwallace/prompt-library init
-
-# Or fix npm permissions
-sudo chown -R $USER $(npm config get prefix)
 ```
 
-### Items Not Loading
+**Solution 2:** Fix npm permissions
+```bash
+# Create a directory for global packages
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
 
-After installation, restart your AI tool:
-- **Claude Code**: Restart the CLI
-- **GitHub Copilot**: Reload VS Code window
+# Add to PATH (add this to ~/.bashrc or ~/.zshrc)
+export PATH=~/.npm-global/bin:$PATH
+
+# Now install globally
+npm install -g @shawnwallace/prompt-library
+```
+
+**Solution 3 (Not Recommended):** Use sudo
+```bash
+sudo npm install -g @shawnwallace/prompt-library
+```
+
+### Agents Not Appearing
+
+**Problem:** Installed agents don't show up in Claude Code or GitHub Copilot
+
+**Solutions:**
+
+1. **Restart your AI tool:**
+   - **Claude Code**: Restart the CLI completely
+   - **GitHub Copilot**: Reload VS Code window (`Cmd/Ctrl + Shift + P` → "Reload Window")
+
+2. **Verify files are in the correct location:**
+   ```bash
+   # For Claude Code
+   ls -la .claude/agents/
+
+   # For GitHub Copilot
+   ls -la .github/agents/
+   ```
+
+3. **Check file permissions:**
+   ```bash
+   # Files should be readable
+   chmod 644 .claude/agents/*.md
+   ```
+
+4. **Verify you're in the right project directory:**
+   ```bash
+   pwd  # Should show your project root
+   ls .prompt-library.json  # Tracking file should exist
+   ```
 
 ### Network Errors
 
-The CLI fetches files from GitHub. If you have network issues:
-- Check your internet connection
-- Try again (the CLI has automatic retry logic)
-- Files are fetched from: `https://raw.githubusercontent.com/shawnewallace/prompt-library/main/`
+**Problem:** `Error fetching file` or timeout errors
+
+**Solutions:**
+
+1. **Check internet connection:**
+   ```bash
+   # Test if you can reach GitHub
+   ping github.com
+   ```
+
+2. **Retry the command:** The CLI has automatic retry logic, just run it again
+
+3. **Check firewall/proxy settings:** Ensure GitHub is accessible
+   ```bash
+   curl https://raw.githubusercontent.com/shawnewallace/prompt-library/main/README.md
+   ```
+
+4. **Source URL:** Files are fetched from:
+   ```
+   https://raw.githubusercontent.com/shawnewallace/prompt-library/main/
+   ```
+
+### Already Installed Conflicts
+
+**Problem:** "Item is already installed" but you want to update it
+
+**Solution:**
+```bash
+prompt-library add <item-name>
+# When prompted, select: "Reinstall (overwrite)"
+```
+
+Or force reinstall by removing and re-adding:
+```bash
+rm .claude/agents/hemingway.md
+prompt-library add hemingway
+```
+
+### Getting Help
+
+Still stuck? Check these resources:
+
+- **View all commands:** `prompt-library --help`
+- **Command-specific help:** `prompt-library <command> --help`
+- **View installed items:** `prompt-library list --installed`
+- **Preview before installing:** `prompt-library add <name> --dry-run`
+- **Report issues:** https://github.com/shawnewallace/prompt-library/issues
 
 ## Development
 

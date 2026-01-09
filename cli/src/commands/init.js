@@ -2,7 +2,7 @@
  * init command - Interactive initialization wizard
  */
 
-const inquirer = require('inquirer');
+const inquirer = require('inquirer').default || require('inquirer');
 const { LOGO, TOOL_TYPES } = require('../constants.js');
 const registry = require('../core/registry.js');
 const { installItems, updateTrackingFile } = require('../core/installer.js');
@@ -10,11 +10,18 @@ const logger = require('../utils/logger.js');
 
 /**
  * Main init command
+ * @param {object} options - Command options
+ * @param {boolean} options.dryRun - Preview mode without installing
  */
-async function init() {
+async function init(options = {}) {
+  const { dryRun = false } = options;
+
   // Welcome screen
   console.log(logger.formatCommand(LOGO));
   logger.header('Welcome to prompt-library!');
+  if (dryRun) {
+    logger.warning('DRY RUN MODE - No files will be written\n');
+  }
   logger.log('Let\'s set up AI agents and prompts for your project.\n');
 
   try {
@@ -137,26 +144,35 @@ async function init() {
 
     // Install items with progress
     logger.newline();
-    const spinner = logger.spinner('Installing items...');
+    const spinnerText = dryRun ? 'Previewing items...' : 'Installing items...';
+    const spinner = logger.spinner(spinnerText);
     spinner.start();
 
-    const results = await installItems(selectedItems, tool);
+    const results = await installItems(selectedItems, tool, { dryRun });
 
     spinner.stop();
 
-    // Update tracking file
-    if (results.successful.length > 0) {
+    // Update tracking file (skip if dry run)
+    if (results.successful.length > 0 && !dryRun) {
       await updateTrackingFile(tool, results.successful);
     }
 
     // Show results
     logger.newline();
+    if (dryRun) {
+      logger.header('Dry Run Results:');
+      logger.warning('The following items WOULD BE installed:\n');
+    }
+
     if (results.failed.length > 0) {
-      logger.header('Installation Results:');
-      logger.newline();
+      if (!dryRun) {
+        logger.header('Installation Results:');
+        logger.newline();
+      }
 
       results.successful.forEach((result) => {
-        logger.success(`${result.item.name} → ${logger.formatPath(result.targetPath)}`);
+        const prefix = dryRun ? 'Would install:' : '';
+        logger.success(`${prefix}${prefix ? ' ' : ''}${result.item.name} → ${logger.formatPath(result.targetPath)}`);
       });
 
       results.failed.forEach((result) => {
@@ -166,32 +182,43 @@ async function init() {
       logger.newline();
       logger.installSummary(results.successful.length, selectedItems.length);
     } else {
-      logger.success('All items installed successfully!\n');
+      const successMessage = dryRun
+        ? 'All items would be installed successfully!\n'
+        : 'All items installed successfully!\n';
+      logger.success(successMessage);
 
       results.successful.forEach((result) => {
-        logger.listItem(`${result.item.name} → ${logger.formatPath(result.targetPath)}`);
+        const prefix = dryRun ? 'Would install:' : '';
+        logger.listItem(`${prefix}${prefix ? ' ' : ''}${result.item.name} → ${logger.formatPath(result.targetPath)}`);
       });
 
       logger.installSummary(results.successful.length, selectedItems.length);
     }
 
     // Next steps
-    const nextStepsText = [];
+    if (dryRun) {
+      logger.newline();
+      logger.info('This was a dry run. To actually install these items, run:');
+      logger.dim(`  ${logger.formatCommand('prompt-library init')}`);
+      logger.newline();
+    } else {
+      const nextStepsText = [];
 
-    if (tool === TOOL_TYPES.CLAUDE_CODE || tool === 'both') {
-      nextStepsText.push('Restart Claude Code to load new agents');
-      nextStepsText.push('Try: "Use Hemingway to review this text"');
+      if (tool === TOOL_TYPES.CLAUDE_CODE || tool === 'both') {
+        nextStepsText.push('Restart Claude Code to load new agents');
+        nextStepsText.push('Try: "Use Hemingway to review this text"');
+      }
+
+      if (tool === TOOL_TYPES.GITHUB_COPILOT || tool === 'both') {
+        nextStepsText.push('Restart VS Code to load new agents');
+        nextStepsText.push('Open GitHub Copilot chat and try your new agents');
+      }
+
+      nextStepsText.push(`Run ${logger.formatCommand('prompt-library list')} to see all available items`);
+      nextStepsText.push(`Run ${logger.formatCommand('prompt-library add <name>')} to add more items later`);
+
+      logger.nextSteps(nextStepsText);
     }
-
-    if (tool === TOOL_TYPES.GITHUB_COPILOT || tool === 'both') {
-      nextStepsText.push('Restart VS Code to load new agents');
-      nextStepsText.push('Open GitHub Copilot chat and try your new agents');
-    }
-
-    nextStepsText.push(`Run ${logger.formatCommand('prompt-library list')} to see all available items`);
-    nextStepsText.push(`Run ${logger.formatCommand('prompt-library add <name>')} to add more items later`);
-
-    logger.nextSteps(nextStepsText);
   } catch (error) {
     if (error.isTtyError) {
       logger.error('Prompt couldn\'t be rendered in the current environment');

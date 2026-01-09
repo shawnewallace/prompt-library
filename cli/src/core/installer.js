@@ -40,9 +40,13 @@ function getTargetFilename(item) {
  * Install a single item (agent or prompt)
  * @param {object} item - Item from registry
  * @param {string} tool - Tool type
+ * @param {object} options - Installation options
+ * @param {boolean} options.dryRun - If true, don't actually write files
  * @returns {Promise<object>} Installation result
  */
-async function installItem(item, tool) {
+async function installItem(item, tool, options = {}) {
+  const { dryRun = false } = options;
+
   try {
     // Fetch content from GitHub
     const content = await fetchFile(item.sourcePath);
@@ -51,8 +55,10 @@ async function installItem(item, tool) {
     const filename = getTargetFilename(item);
     const targetPath = getTargetPath(tool, item.type, filename);
 
-    // Write file
-    await writeFile(targetPath, content);
+    // Write file (skip if dry run)
+    if (!dryRun) {
+      await writeFile(targetPath, content);
+    }
 
     // Compute hash for tracking
     const sha = computeHash(content);
@@ -62,12 +68,14 @@ async function installItem(item, tool) {
       item,
       targetPath,
       sha,
+      dryRun,
     };
   } catch (error) {
     return {
       success: false,
       item,
       error: error.message,
+      dryRun,
     };
   }
 }
@@ -76,16 +84,18 @@ async function installItem(item, tool) {
  * Install multiple items
  * @param {Array<object>} items - Array of items from registry
  * @param {string} tool - Tool type
+ * @param {object} options - Installation options
+ * @param {boolean} options.dryRun - If true, don't actually write files
  * @returns {Promise<object>} Installation results
  */
-async function installItems(items, tool) {
+async function installItems(items, tool, options = {}) {
   const results = {
     successful: [],
     failed: [],
   };
 
   for (const item of items) {
-    const result = await installItem(item, tool);
+    const result = await installItem(item, tool, options);
 
     if (result.success) {
       results.successful.push(result);
