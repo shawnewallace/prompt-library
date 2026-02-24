@@ -14,7 +14,7 @@ const TOOL_TYPES = {
 const PATH_MAPPINGS = {
   [TOOL_TYPES.CLAUDE_CODE]: {
     agents: '.claude/agents',
-    prompts: '.claude/prompts',
+    prompts: '.claude/commands',
   },
   [TOOL_TYPES.GITHUB_COPILOT]: {
     agents: '.github/agents',
