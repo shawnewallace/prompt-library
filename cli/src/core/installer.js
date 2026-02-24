@@ -21,6 +21,11 @@ function getTargetPath(tool, itemType, filename) {
     return path.join(process.cwd(), mapping.agents, filename);
   } else if (itemType === 'prompt') {
     return path.join(process.cwd(), mapping.prompts, filename);
+  } else if (itemType === 'template') {
+    if (!mapping.templates) {
+      throw new Error(`Templates are not supported for this tool`);
+    }
+    return path.join(process.cwd(), mapping.templates, filename);
   }
 
   throw new Error(`Unknown item type: ${itemType}`);
@@ -124,6 +129,7 @@ async function updateTrackingFile(tool, installResults) {
     items: {
       agents: {},
       prompts: {},
+      templates: {},
     },
   };
 
@@ -131,10 +137,16 @@ async function updateTrackingFile(tool, installResults) {
     trackingData = await readJson(trackingPath);
   }
 
+  // Ensure templates key exists in older tracking files
+  if (!trackingData.items.templates) {
+    trackingData.items.templates = {};
+  }
+
   // Add installed items to tracking
   for (const result of installResults) {
     const { item, targetPath, sha } = result;
-    const itemType = item.type === 'agent' ? 'agents' : 'prompts';
+    const itemTypeMap = { agent: 'agents', prompt: 'prompts', template: 'templates' };
+    const itemType = itemTypeMap[item.type] || 'prompts';
 
     trackingData.items[itemType][item.id] = {
       name: item.name,
@@ -178,7 +190,8 @@ async function isInstalled(itemId) {
 
   return !!(
     summary.items.agents[itemId] ||
-    summary.items.prompts[itemId]
+    summary.items.prompts[itemId] ||
+    (summary.items.templates && summary.items.templates[itemId])
   );
 }
 

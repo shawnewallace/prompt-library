@@ -17,7 +17,8 @@ function isItemInstalled(itemId, installSummary) {
   if (!installSummary) return false;
   return !!(
     installSummary.items.agents[itemId] ||
-    installSummary.items.prompts[itemId]
+    installSummary.items.prompts[itemId] ||
+    (installSummary.items.templates && installSummary.items.templates[itemId])
   );
 }
 
@@ -99,6 +100,7 @@ async function list(options) {
   // Get all items
   const agents = registry.getAgents();
   const prompts = registry.getPrompts();
+  const templates = registry.getTemplates();
   const scenarios = registry.getScenarios();
 
   // Filter based on options
@@ -106,8 +108,9 @@ async function list(options) {
     // Show only installed items
     const installedAgents = agents.filter((a) => isItemInstalled(a.id, installSummary));
     const installedPrompts = prompts.filter((p) => isItemInstalled(p.id, installSummary));
+    const installedTemplates = templates.filter((t) => isItemInstalled(t.id, installSummary));
 
-    if (installedAgents.length === 0 && installedPrompts.length === 0) {
+    if (installedAgents.length === 0 && installedPrompts.length === 0 && installedTemplates.length === 0) {
       logger.warning('No items installed yet.');
       logger.info(`Run ${logger.formatCommand('prompt-library init')} to get started.`);
       logger.newline();
@@ -116,12 +119,16 @@ async function list(options) {
 
     displayItems(installedAgents, installSummary, 'Installed Agents');
     displayItems(installedPrompts, installSummary, 'Installed Prompts');
+    displayItems(installedTemplates, installSummary, 'Installed Templates');
   } else if (options.agents) {
     // Show only agents
     displayItems(agents, installSummary, 'Available Agents');
   } else if (options.prompts) {
     // Show only prompts
     displayItems(prompts, installSummary, 'Available Prompts');
+  } else if (options.templates) {
+    // Show only templates
+    displayItems(templates, installSummary, 'Available Templates');
   } else if (options.scenarios) {
     // Show only scenarios
     displayScenarios(scenarios);
@@ -129,13 +136,14 @@ async function list(options) {
     // Show everything
     displayItems(agents, installSummary, 'Available Agents');
     displayItems(prompts, installSummary, 'Available Prompts');
+    displayItems(templates, installSummary, 'Available Templates (GitHub Copilot only)');
     displayScenarios(scenarios);
   }
 
   // Footer
   if (!options.installed) {
     logger.divider();
-    logger.dim(`✓ = installed    Total: ${agents.length} agents, ${prompts.length} prompts, ${scenarios.length} scenarios`);
+    logger.dim(`✓ = installed    Total: ${agents.length} agents, ${prompts.length} prompts, ${templates.length} templates, ${scenarios.length} scenarios`);
     logger.newline();
     logger.info(`Run ${logger.formatCommand('prompt-library add <name>')} to install an item`);
     logger.info(`Run ${logger.formatCommand('prompt-library init')} to start fresh installation`);

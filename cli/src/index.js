@@ -45,6 +45,7 @@ function run() {
     .description('List available agents, prompts, and scenarios')
     .option('--agents', 'Show only agents')
     .option('--prompts', 'Show only prompts')
+    .option('--templates', 'Show only templates')
     .option('--scenarios', 'Show only scenarios')
     .option('--installed', 'Show only installed items')
     .action(async (options) => {

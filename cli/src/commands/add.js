@@ -82,6 +82,14 @@ async function add(name, options = {}) {
     tool = selectedTool;
   }
 
+  // Check tool compatibility
+  if (item.tools && !item.tools.includes(tool)) {
+    logger.error(`${item.name} is not supported for ${tool}.`);
+    logger.info(`Supported tools: ${item.tools.join(', ')}`);
+    logger.newline();
+    return;
+  }
+
   // Handle scenarios (install bundle)
   if (item.type === 'scenario') {
     logger.info(`Installing ${item.name} scenario bundle...\n`);

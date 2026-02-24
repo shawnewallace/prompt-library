@@ -20,6 +20,7 @@ const PATH_MAPPINGS = {
     agents: '.github/agents',
     prompts: '.github/prompts',
     instructions: '.github/instructions',
+    templates: '.github/PULL_REQUEST_TEMPLATE',
     main: '.github/copilot-instructions.md',
   },
 };

@@ -93,6 +93,32 @@
       "tools": ["claude-code", "github-copilot"]
     }
   ],
+  "templates": [
+    {
+      "id": "pr-template-feature",
+      "name": "Feature PR Template",
+      "description": "Pull request template for feature additions",
+      "sourcePath": "shared/templates/pull-request/feature.md",
+      "tags": ["templates", "pull-request", "github", "feature"],
+      "tools": ["github-copilot"]
+    },
+    {
+      "id": "pr-template-fix",
+      "name": "Fix PR Template",
+      "description": "Pull request template for bug fixes",
+      "sourcePath": "shared/templates/pull-request/fix.md",
+      "tags": ["templates", "pull-request", "github", "fix"],
+      "tools": ["github-copilot"]
+    },
+    {
+      "id": "pr-template-chore",
+      "name": "Chore PR Template",
+      "description": "Pull request template for maintenance and refactoring",
+      "sourcePath": "shared/templates/pull-request/chore.md",
+      "tags": ["templates", "pull-request", "github", "chore"],
+      "tools": ["github-copilot"]
+    }
+  ],
   "scenarios": [
     {
       "id": "dotnet-clean-architecture",

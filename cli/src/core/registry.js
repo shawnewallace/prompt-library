@@ -29,6 +29,14 @@ function getScenarios() {
 }
 
 /**
+ * Get all available templates
+ * @returns {Array} Array of template objects
+ */
+function getTemplates() {
+  return registryData.templates || [];
+}
+
+/**
  * Get all items (agents, prompts, scenarios combined)
  * @returns {Array} Array of all items with type field
  */
@@ -36,6 +44,7 @@ function getAllItems() {
   return [
     ...registryData.agents.map((item) => ({ ...item, type: 'agent' })),
     ...registryData.prompts.map((item) => ({ ...item, type: 'prompt' })),
+    ...(registryData.templates || []).map((item) => ({ ...item, type: 'template' })),
     ...registryData.scenarios.map((item) => ({ ...item, type: 'scenario' })),
   ];
 }
@@ -55,6 +64,10 @@ function findById(id) {
   // Search prompts
   const prompt = registryData.prompts.find((p) => p.id === idLower);
   if (prompt) return { ...prompt, type: 'prompt' };
+
+  // Search templates
+  const template = (registryData.templates || []).find((t) => t.id === idLower);
+  if (template) return { ...template, type: 'template' };
 
   // Search scenarios
   const scenario = registryData.scenarios.find((s) => s.id === idLower);
@@ -126,6 +139,7 @@ module.exports = {
   getAgents,
   getPrompts,
   getScenarios,
+  getTemplates,
   getAllItems,
   findById,
   findByName,
