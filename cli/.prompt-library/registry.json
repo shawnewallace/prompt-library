@@ -49,6 +49,14 @@
       "sourcePath": "shared/agents/api-architect.agent.md",
       "tags": ["api", "architecture", "design", "resilience"],
       "tools": ["claude-code", "github-copilot"]
+    },
+    {
+      "id": "ellie",
+      "name": "Ellie",
+      "description": "Business Analyst agent that elicits and documents requirements from input files and user conversations",
+      "sourcePath": "shared/agents/ellie.agent.md",
+      "tags": ["business-analysis", "requirements", "documentation", "discovery"],
+      "tools": ["claude-code", "github-copilot"]
     }
   ],
   "prompts": [
