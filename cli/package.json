@@ -45,5 +45,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "overrides": {
+    "onetime": "5.1.2"
   }
 }
