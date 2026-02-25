@@ -101,7 +101,7 @@ prompt-library init
 
 # Files will be installed to:
 # ~/projects/my-dotnet-app/.claude/agents/
-# ~/projects/my-dotnet-app/.claude/prompts/
+# ~/projects/my-dotnet-app/.claude/commands/
 ```
 
 ### Step 3: Browse Available Items
@@ -116,6 +116,7 @@ Filter by type:
 ```bash
 prompt-library list --agents      # Show only agents
 prompt-library list --prompts     # Show only prompts
+prompt-library list --templates   # Show only templates
 prompt-library list --scenarios   # Show only scenarios
 prompt-library list --installed   # Show only installed items
 ```
@@ -188,10 +189,10 @@ If you want to start fresh:
 1. **Remove existing files:**
    ```bash
    # For Claude Code
-   rm -rf .claude/agents .claude/prompts
+   rm -rf .claude/agents .claude/commands
 
    # For GitHub Copilot
-   rm -rf .github/agents .github/prompts
+   rm -rf .github/agents .github/prompts .github/PULL_REQUEST_TEMPLATE
    ```
 
 2. **Remove tracking file:**
@@ -216,6 +217,7 @@ If you want to start fresh:
 | `sharp` | Sharp | Expert .NET software engineer |
 | `percy` | Percy | Strategic planning and architecture assistant |
 | `apex` | Apex | API architect specialized in resilience patterns |
+| `ellie` | Ellie | Business Analyst for requirements elicitation and documentation |
 
 ### Prompts
 
@@ -225,6 +227,16 @@ If you want to start fresh:
 | `adr` | Architectural Decision Record | Create structured ADR documents |
 | `readme` | README Generator | Create comprehensive README files |
 | `client-discovery` | Client Discovery | Extract meeting details |
+
+### Templates
+
+Pull request templates (GitHub Copilot only — installed to `.github/PULL_REQUEST_TEMPLATE/`):
+
+| Template | Description |
+|----------|-------------|
+| `pr-template-feature` | Pull request template for feature additions |
+| `pr-template-fix` | Pull request template for bug fixes |
+| `pr-template-chore` | Pull request template for maintenance and refactoring |
 
 ### Scenarios
 
@@ -312,6 +324,7 @@ List available items with installation status.
 prompt-library list              # Show all items
 prompt-library list --agents     # Agents only
 prompt-library list --prompts    # Prompts only
+prompt-library list --templates  # Templates only
 prompt-library list --scenarios  # Scenarios only
 prompt-library list --installed  # Installed items only
 ```
@@ -347,7 +360,7 @@ Supports fuzzy matching for item names.
 ├── agents/
 │   ├── hemingway.md
 │   └── archy.md
-└── prompts/
+└── commands/
     └── writing-clarity.md
 ```
 
@@ -357,8 +370,12 @@ Supports fuzzy matching for item names.
 ├── agents/
 │   ├── hemingway.md
 │   └── archy.md
-└── prompts/
-    └── writing-clarity.md
+├── prompts/
+│   └── writing-clarity.md
+└── PULL_REQUEST_TEMPLATE/
+    ├── pr-template-feature.md
+    ├── pr-template-fix.md
+    └── pr-template-chore.md
 ```
 
 ### Tracking File
@@ -381,7 +398,8 @@ The CLI creates `.prompt-library.json` to track installed items:
         "sha": "abc123..."
       }
     },
-    "prompts": {}
+    "prompts": {},
+    "templates": {}
   }
 }
 ```

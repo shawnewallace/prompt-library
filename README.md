@@ -87,10 +87,9 @@ Prompts for infrastructure as code, CI/CD, and deployment automation.
 ## Shared Resources
 
 The [`shared/`](shared/) directory contains resources used across multiple scenarios:
-- **agents/** - Reusable agent definitions (clarity-editor, check, architect, plan)
-- **prompts/** - General-purpose prompts (code review, documentation, debugging, writing clarity)
-- **templates/** - Reusable prompt templates
-- **snippets/** - Common prompt fragments
+- **agents/** - Reusable agent definitions (Hemingway, Archy, Chester, Sharp, Percy, Apex, Ellie)
+- **prompts/** - General-purpose prompts (writing clarity, ADR, README, client discovery)
+- **templates/** - Pull request templates (feature, fix, chore)
 
 ## Usage
 
