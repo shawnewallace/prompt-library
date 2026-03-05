@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2025-12-08",
+  "lastUpdated": "2026-03-05",
   "agents": [
     {
       "id": "hemingway",
@@ -53,8 +53,8 @@
     {
       "id": "ellie",
       "name": "Ellie",
-      "description": "Business Analyst agent that elicits and documents requirements from input files and user conversations",
-      "sourcePath": "shared/agents/ellie.agent.md",
+      "description": "Business Analyst agent that elicits and documents requirements from input files and user conversations. Adapts to team methodology, terminology, and prioritization preferences.",
+      "sourcePath": "shared/agents/ellie.agent.v2.md",
       "tags": ["business-analysis", "requirements", "documentation", "discovery"],
       "tools": ["claude-code", "github-copilot"]
     }
